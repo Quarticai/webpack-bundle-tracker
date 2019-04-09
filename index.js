@@ -74,7 +74,11 @@ Plugin.prototype.apply = function(compiler) {
           }
           return F;
         });
-        chunks[chunk.name] = files;
+        if (chunk.name in chunks) {
+          chunks[chunk.name] = chunks[chunk.name].concat(files)
+        } else{
+          chunks[chunk.name] = files;
+        }
       });
       var output = {
         status: 'done',
